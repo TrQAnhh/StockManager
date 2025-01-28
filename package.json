@@ -1,0 +1,28 @@
+{
+  "name": "product-management",
+  "version": "1.0.0",
+  "description": "A website designed for self-learning about website development using the ExpressJS framework, with a focus on managing products",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "nodemon --inspect index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TrQAnhh/Product-Management.git"
+  },
+  "author": "TrQAnhh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TrQAnhh/Product-Management/issues"
+  },
+  "homepage": "https://github.com/TrQAnhh/Product-Management#readme",
+  "dependencies": {
+    "bootstrap": "^5.3.3",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongoose": "^8.9.5",
+    "nodemon": "^3.1.9",
+    "pug": "^3.0.3"
+  }
+}
