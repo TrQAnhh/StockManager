@@ -6,9 +6,8 @@ block main
     .card.mb-3
         .card-header Filter and Search
         .card-body
-            button(class="btn btn-sm ml-1 btn-outline-success active" button-status="") All
-            button(class="btn btn-sm ml-1 btn-outline-success" button-status="active") Active
-            button(class="btn btn-sm ml-1 btn-outline-success" button-status="inactive") Inactive
+            each item in filterStatus
+                button(class=`btn btn-sm ml-1 btn-outline-success ${item.class}` button-status=item.status) #{item.name}
 
     table.table.table-bordered.table-striped
         thead
