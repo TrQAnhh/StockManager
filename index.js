@@ -1,9 +1,13 @@
 const express = require("express");
 const database = require("./config/database");
 const app = express();
+const systemConfig = require('./config/system.js');
 require("dotenv").config();
 
 const port = process.env.PORT;
+
+// App Locals Variables
+app.locals.prefixAdmin = systemConfig.prefixAdmin;
 
 //  Client route
 const clientRoute = require("./routes/client/index.route");
