@@ -13,11 +13,12 @@ block main
                 .col-6
                     form(id="form-search")
                         .input-group
+                            //- "value=keyword" used to preserve the entered keyword after reloading the page
                             input(
                                 type="text",
                                 placeholder="Enter keyword",
                                 name="keyword",
-                                class="form-control"
+                                class="form-control",
                                 value=keyword
                             )
                             .input-group-append
