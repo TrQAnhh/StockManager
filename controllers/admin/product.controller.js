@@ -34,10 +34,23 @@ module.exports.index = async (req, res) => {
         condition.status = req.query.status;
     }
 
+    let keyword = "";
+
+    if(req.query.keyword) {
+        keyword = req.query.keyword;
+
+        // const regex = /keyword/i;
+
+        const regex= new RegExp(keyword, "i");
+
+        condition.title = regex;
+    }
+
     const products = await Product.find(condition);
 
     res.render("admin/pages/product/index",{
         products: products,
         filterStatus: filterStatus,
+        keyword: keyword
     });
 }
