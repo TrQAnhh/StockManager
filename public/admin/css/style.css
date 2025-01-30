@@ -182,6 +182,11 @@ img {
     justify-content: center;
 }
 
+.page-item.disabled {
+    user-select: none;
+    opacity: 0.5;
+}
+
 
 @media (max-width: 768px) {
     .sider {
