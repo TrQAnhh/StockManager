@@ -1,6 +1,7 @@
 extends ../../layouts/default.pug
 include ../../mixins/filter-status
 include ../../mixins/search
+include ../../mixins/pagination
 
 block main
     h1.text-center.my-4 Product List
@@ -42,9 +43,9 @@ block main
                         td #{item.price}$
                         td
                             if item.status == "active"
-                                a(href="#" class="badge badge-success") Active
+                                span(class="badge badge-success") Active
                             else
-                                a(href="#" class="badge badge-danger") Inactive
+                                span(class="badge badge-danger") Inactive
                         td
                             button(class="btn btn-warning btn-sm") Edit
                             button(class="btn btn-danger btn-sm ml-1") Delete
@@ -52,3 +53,4 @@ block main
                 //- If no products are found, display a message in a single row spanning all columns
                 tr
                     td(colspan="6" class="text-center text-danger fw-bold") No results found
+    +pagination(pagination)
