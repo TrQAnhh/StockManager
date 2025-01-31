@@ -1,0 +1,303 @@
+/* General Layout */
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.body {
+    display: flex;
+    flex: 1;
+    height: auto;
+}
+
+.sider {
+    width: auto;
+    min-width: 200px;
+    max-width: 250px;
+    background-color: #f8f9fa;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.sider ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sider ul li {
+    margin-bottom: 15px;
+}
+
+.sider ul li a {
+    text-decoration: none;
+    font-size: 16px;
+    color: #343a40;
+    padding: 8px 15px;
+    display: block;
+    border-radius: 5px;
+    text-align: left;
+    user-select: none;
+    transition: all 0.3s ease;
+}
+
+.sider ul li a:hover {
+    background-color: #007bff;
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.sider ul li a.active {
+    background-color: #0056b3;
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.main {
+    flex: 1;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+header.header {
+    background-color: #343a40;
+    color: #fff;
+    padding: 15px 0;
+    border-bottom: 3px solid #007bff;
+}
+
+header .container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+header .inner-menu ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+}
+
+header .inner-menu ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    padding: 8px 15px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border-radius: 5px;
+}
+
+header .inner-menu ul li a:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+header .inner-menu ul li a.active {
+    background-color: #0056b3;
+}
+
+footer.footer {
+    background-color: #343a40;
+    color: #fff;
+    padding: 20px 0;
+    border-top: 3px solid #007bff;
+    text-align: center;
+    font-size: 14px;
+    margin-top: auto;
+}
+
+.card {
+    margin: 20px auto;
+    width: 90%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+table.table {
+    margin: 20px auto;
+    width: 90%;
+    text-align: center;
+    border-collapse: separate;
+    border-spacing: 0px;
+    border-radius: 5px;
+    overflow: hidden;
+    border: 1px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+table.table th,
+table.table td {
+    padding: 10px;
+    vertical-align: middle;
+    border: 1px solid #dddddd;
+}
+
+/* Bo góc đúng cách */
+table.table tr:first-child th:first-child {
+    border-top-left-radius: 5px;
+}
+table.table tr:first-child th:last-child {
+    border-top-right-radius: 5px;
+}
+table.table tr:last-child td:first-child {
+    border-bottom-left-radius: 5px;
+}
+table.table tr:last-child td:last-child {
+    border-bottom-right-radius: 5px;
+}
+
+img {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.item-thumbnail {
+    border-radius: 5px;
+    border: 5px solid #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.badge-success {
+    background-color: #28a745;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 3px;
+}
+
+.badge-danger {
+    background-color: #dc3545;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 3px;
+}
+
+.btn-sm {
+    font-size: 14px;
+    padding: 5px 10px;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+}
+
+.page-item.disabled {
+    user-select: none;
+    opacity: 0.5;
+}
+
+.status-button,.actions-button {
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.status-button:hover,.actions-button:hover {
+    transform: scale(1.1);
+    opacity: 0.9;
+}
+
+.status-button:active,.actions-button:active {
+    transform: scale(0.95);
+    opacity: 0.8;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Style for the Status Change card */
+.card.mb-3 .form-change-multi {
+    margin: 0 auto;
+    padding: 10px 20px;
+    background-color: #f8f9fa;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center; /* Căn giữa theo chiều dọc */
+    gap: 10px; /* Khoảng cách đều giữa các phần tử */
+}
+
+.card.mb-3 .form-change-multi select {
+    height: 40px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    padding: 5px 10px;
+    background-color: #ffffff;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    width: 150px;
+}
+
+.card.mb-3 .form-change-multi select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.card.mb-3 .form-change-multi input.form-control {
+    flex-grow: 1;
+    max-width: 400px; /* Căn chỉnh chiều rộng */
+    height: 40px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    padding: 5px 15px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background-color: #ffffff;
+}
+
+.card.mb-3 .form-change-multi input.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.card.mb-3 .form-change-multi .btn-apply {
+    height: 40px; /* Đồng bộ với select và input */
+    font-size: 14px;
+    border-radius: 5px;
+    padding: 5px 20px; /* Khoảng cách hợp lý bên trong nút */
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+}
+
+.card.mb-3 .form-change-multi .btn-apply:hover {
+    background-color: #0056b3;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .sider {
+        display: none;
+    }
+
+    .main {
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    header .inner-menu ul {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .card.mb-3 .form-change-multi {
+        flex-direction: column; /* Sắp xếp dọc trên màn hình nhỏ */
+        align-items: stretch;
+        gap: 15px;
+    }
+
+    .card.mb-3 .form-change-multi select,
+    .card.mb-3 .form-change-multi input.form-control,
+    .card.mb-3 .form-change-multi .btn-apply {
+        width: 100%;
+    }
+}
