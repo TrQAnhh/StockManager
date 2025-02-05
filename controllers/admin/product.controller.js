@@ -69,9 +69,23 @@ module.exports.changeMulti = async (req, res) => {
     const type = req.body.type;
     const ids = req.body.ids.split(", ");
 
-    await Product.updateMany({_id: { $in: ids }}, {status: type} );
+    // Soft Delete (set deleted attribute of record to true)
+    switch (type) {
+        case "active":
+            await Product.updateMany({_id: {$in: ids}}, {status: type});
+            break;
+        case "inactive":
+            await Product.updateMany({_id: {$in: ids}}, {status: type});
+            break;
+        case "delete-all":
+            await Product.updateMany({_id: {$in: ids}}, {deleted: true, status: "inactive", deletedAt: new Date()});
+            break;
+        default:
+            break;
+    }
+
     res.redirect("back");
-}
+};
 
 // [DELETE] /admin/products/delete/:id
 module.exports.deleteProduct = async (req,res) => {

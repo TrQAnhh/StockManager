@@ -6,8 +6,10 @@ mixin form-change-multi(action)
         .d-flex.align-items-start
             .form-group
                 select(name="type" class="form-control")
+                    option(disabled selected) -- Select --
                     option(value="active") Active
                     option(value="inactive") Inactive
+                    option(value="delete-all") Delete all
             .form-group.ml-2
                 input(
                     type="text"
