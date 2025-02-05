@@ -1,10 +1,18 @@
 const express = require("express");
 const database = require("./config/database");
-const app = express();
+const methodOverride = require('method-override');
+const bodyParser = require('body-parser')
 const systemConfig = require('./config/system.js');
 require("dotenv").config();
 
 const port = process.env.PORT;
+const app = express();
+
+// Parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// Method - override
+app.use(methodOverride('_method'))
 
 // App Locals Variables
 app.locals.prefixAdmin = systemConfig.prefixAdmin;

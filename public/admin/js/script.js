@@ -13,8 +13,8 @@ if(buttonsStatus.length > 0) {
             } else {
                 url.searchParams.delete("status");
             }
-
-            window.location.href = url;
+            url.searchParams.set("page", "1");
+            window.location.href = url.toString();
         });
     });
 }
@@ -58,4 +58,61 @@ if(buttonsPagination.length > 0) {
             window.location.href = url;
         })
     })
+}
+
+// Checkbox multi
+const checkboxMulti = document.querySelector("[checkbox-multi]");
+if(checkboxMulti) {
+    const inputCheckAll=checkboxMulti.querySelector("input[name='checkall']");
+    const inputsId = checkboxMulti.querySelectorAll("input[name='id']");
+
+    // Check-all
+    inputCheckAll.addEventListener("click", (e) => {
+        if(inputCheckAll.checked) {
+            inputsId.forEach(input => {
+                input.checked = true;
+            });
+        } else {
+            inputsId.forEach(input => {
+                input.checked = false;
+            });
+        }
+    });
+
+    inputsId.forEach(input => {
+        input.addEventListener("click", (e) => {
+            const countCheckedBoxes = checkboxMulti.querySelectorAll("input[name='id']:checked").length;
+            // console.log(checkedBoxes.length);
+            // console.log(inputsId.length);
+            if (countCheckedBoxes == inputsId.length) {
+                inputCheckAll.checked = true;
+            } else {
+                inputCheckAll.checked = false;
+            }
+        });
+    })
+}
+
+// Form change multi
+const formChangeMulti = document.querySelector("#form-change-multi");
+if (formChangeMulti) {
+    formChangeMulti.addEventListener("submit", (e) => {
+        e.preventDefault(); // prevent reloading pages after submitting a form
+
+        const inputsChecked = checkboxMulti.querySelectorAll("input[name='id']:checked");
+
+        if (inputsChecked.length > 0) {
+            let ids= [];
+            const inputIds = formChangeMulti.querySelector("input[name='ids']");
+
+            inputsChecked.forEach(input => {
+                const id = input.getAttribute("value");
+                ids.push(id);
+            });
+            inputIds.value = ids.join(", ");
+            formChangeMulti.submit();
+        } else {
+            alert("Please choose at least one product!")
+        }
+    });
 }

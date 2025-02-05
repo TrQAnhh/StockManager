@@ -2,6 +2,7 @@ extends ../../layouts/default.pug
 include ../../mixins/filter-status
 include ../../mixins/search
 include ../../mixins/pagination
+include ../../mixins/change-multi-status
 
 block main
     h1.text-center.my-4 Product List
@@ -15,10 +16,20 @@ block main
                 .col-6
                     +search(keyword)
 
+    .card.mt-3
+        .card-header Product Management
+        .card-body
+            +form-change-multi(`${prefixAdmin}/products/change-multi?_method=PATCH`)
+
     //- Always display the table, regardless of whether there are results or not
-    table.table.table-bordered.table-striped
+    table(
+        class="table table-bordered table-striped"
+        checkbox-multi
+    )
         thead
             tr
+                th
+                    input(type="checkbox" id="check-all" name="checkall")
                 th No.
                 th Image
                 th Title
@@ -30,6 +41,13 @@ block main
                 //- Loop through products and display each item
                 each item, index in products
                     tr
+                        td
+                            input(
+                                type="checkbox"
+                                class="checkbox-item"
+                                name="id"
+                                value=item.id
+                            )
                         td #{index + 1}
                         td
                             img(
@@ -43,14 +61,33 @@ block main
                         td #{item.price}$
                         td
                             if item.status == "active"
-                                span(class="badge badge-success") Active
+                                button(
+                                    class="btn badge-success btn-change-status"
+                                    button-change-status
+                                    data-status=item.status
+                                    data-id=item.id
+                                ) Active
                             else
-                                span(class="badge badge-danger") Inactive
+                                button(
+                                    class="btn badge-danger btn-change-status"
+                                    button-change-status
+                                    data-status=item.status
+                                    data-id=item.id
+                                ) Inactive
                         td
                             button(class="btn btn-warning btn-sm") Edit
                             button(class="btn btn-danger btn-sm ml-1") Delete
             else
                 //- If no products are found, display a message in a single row spanning all columns
                 tr
-                    td(colspan="6" class="text-center text-danger fw-bold") No results found
+                    td(colspan="7" class="text-center text-danger fw-bold") No results found
     +pagination(pagination)
+
+    form(
+        action=""
+        method="POST"
+        id="form-change-status"
+        data-path=`${prefixAdmin}/products/change-status`
+    )
+
+    script(src="/admin/js/product.js")

@@ -115,6 +115,7 @@ footer.footer {
     width: 90%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
 table.table {
     margin: 20px auto;
     width: 90%;
@@ -134,20 +135,6 @@ table.table td {
     border: 1px solid #dddddd;
 }
 
-/* Bo góc đúng cách */
-table.table tr:first-child th:first-child {
-    border-top-left-radius: 5px;
-}
-table.table tr:first-child th:last-child {
-    border-top-right-radius: 5px;
-}
-table.table tr:last-child td:first-child {
-    border-bottom-left-radius: 5px;
-}
-table.table tr:last-child td:last-child {
-    border-bottom-right-radius: 5px;
-}
-
 img {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -161,15 +148,66 @@ img {
 .badge-success {
     background-color: #28a745;
     color: white;
-    padding: 5px 10px;
+    padding: 5px 8px;
+    font-size: 12px;
+    font-weight: bold;
     border-radius: 3px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.badge-success:hover {
+    background-color: #218838;
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .badge-danger {
     background-color: #dc3545;
     color: white;
-    padding: 5px 10px;
+    padding: 5px 8px;
+    font-size: 12px;
+    font-weight: bold;
     border-radius: 3px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.badge-danger:hover {
+    background-color: #c82333;
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-change-status {
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.btn-change-status:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-change-status.badge-success {
+    background-color: #28a745;
+    color: white;
+    font-weight: bold;
+}
+
+.btn-change-status.badge-success:hover {
+    background-color: #218838;
+}
+
+.btn-change-status.badge-danger {
+    background-color: #dc3545;
+    color: white;
+    font-weight: bold;
+}
+
+.btn-change-status.badge-danger:hover {
+    background-color: #c82333;
 }
 
 .btn-sm {
@@ -186,7 +224,6 @@ img {
     user-select: none;
     opacity: 0.5;
 }
-
 
 @media (max-width: 768px) {
     .sider {
