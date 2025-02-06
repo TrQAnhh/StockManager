@@ -3,8 +3,11 @@ include ../../mixins/filter-status
 include ../../mixins/search
 include ../../mixins/pagination
 include ../../mixins/change-multi-status
+include ../../mixins/alert
 
 block main
+    +alert-success("5000")
+
     h1.text-center.my-4 Product List
 
     .card.mb-3
@@ -41,6 +44,7 @@ block main
                 th Image
                 th Title
                 th Price
+                th Position
                 th Status
                 th Actions
         tbody
@@ -68,6 +72,14 @@ block main
                             )
                         td #{item.title}
                         td #{item.price}$
+                        td
+                            input(
+                                type="number"
+                                value=item.position
+                                style="width: 60px"
+                                min="1"
+                                name="position"
+                            )
                         td
                             if item.status == "active"
                                 button(

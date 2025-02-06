@@ -40,6 +40,7 @@ module.exports.index = async (req, res) => {
 
     // Fetch products based on the condition and pagination
     const products = await Product.find(condition)
+        .sort({ position: "desc"})
         .limit(objectPagination.limitItems)
         .skip(objectPagination.skip);
 
@@ -59,7 +60,7 @@ module.exports.changeStatus = async (req, res) => {
     const id = req.params.id;
 
     await Product.updateOne({_id: id},{status: status});
-
+    req.flash("success","Successfully update the product's status");
     res.redirect("back");
 
 }
@@ -73,12 +74,23 @@ module.exports.changeMulti = async (req, res) => {
     switch (type) {
         case "active":
             await Product.updateMany({_id: {$in: ids}}, {status: type});
+            req.flash("success",`Successfully updated the status of ${ids.length} products`);
             break;
         case "inactive":
             await Product.updateMany({_id: {$in: ids}}, {status: type});
+            req.flash("success",`Successfully updated the status of ${ids.length} products`);
             break;
         case "delete-all":
             await Product.updateMany({_id: {$in: ids}}, {deleted: true, status: "inactive", deletedAt: new Date()});
+            req.flash("success",`Successfully delete ${ids.length} products`);
+            break;
+        case "change-position":
+            for(const item of ids) {
+                let [id,position] = item.split("-");
+                position = parseInt(position);
+                await Product.updateOne({_id: id}, {position: position});
+            }
+            req.flash("success",`Successfully change the products' positions`);
             break;
         default:
             break;
@@ -102,7 +114,7 @@ module.exports.deleteProduct = async (req,res) => {
             status: "inactive",
         },
     );
-
+    req.flash("success",`Successfully delete the product`);
     res.redirect("back");
 }
 
@@ -114,8 +126,9 @@ module.exports.restoreProduct = async (req,res) => {
         {_id: id},
         {deleted: false,
                 deletedAt: null,
+                status: "active",
         },
     );
-
+    req.flash("success",`Successfully restore the product`);
     res.redirect("back");
 }

@@ -236,6 +236,99 @@ img {
     box-shadow: none;
 }
 
+/* Alert-success styling similar to Bootstrap */
+[show-alert] {
+    position: fixed;
+    top: 70px;
+    right: 15px;
+    z-index: 9999;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    color: #155724;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    max-width: calc(100% - 30px);
+    user-select: none;
+    box-sizing: border-box;
+    animation: slide-down 0.5s ease, fade-out 5s ease forwards;
+    transition: opacity 0.3s ease;
+}
+
+[show-alert] button {
+    background-color: #28a745;
+    border: none;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    flex-shrink: 0;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+[show-alert] button:hover {
+    background-color: #218838;
+}
+
+[show-alert] button:active {
+    background-color: #1e7e34;
+    transform: scale(0.95);
+}
+
+[show-alert]::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: green;
+    animation: progress-bar 5s linear forwards;
+}
+
+.alert-hidden {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    display: none;
+}
+
+@keyframes slide-down {
+    from {
+        transform: translateY(-30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes progress-bar {
+    from {
+        width: 100%;
+    }
+    to {
+        width: 0%;
+    }
+}
+
+@keyframes fade-out {
+    0% {
+        opacity: 1;
+    }
+    80% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
 
 @media (max-width: 768px) {
     .sider {
