@@ -126,12 +126,34 @@ if (formChangeMulti) {
 
             inputsChecked.forEach(input => {
                 const id = input.getAttribute("value");
-                ids.push(id);
+                if(typeChange == "change-position") {
+                    const position = input.closest("tr").querySelector("input[name='position']").value;
+                    ids.push(`${id}-${position}`);
+                } else {
+                    ids.push(id);
+                }
             });
             inputIds.value = ids.join(", ");
             formChangeMulti.submit();
         } else {
             alert("Please choose at least one product!")
         }
+    });
+}
+
+const showAlert = document.querySelector("[show-alert]");
+if (showAlert) {
+    const time = parseInt(showAlert.getAttribute("data-time"));
+    const closeAlert = showAlert.querySelector("[close-alert]");
+
+    // Declare timer variable in the correct scope
+    let timer = setTimeout(() => {
+        showAlert.classList.add("alert-hidden");
+    }, time);
+
+    // Hide the alert immediately when the close button is clicked
+    closeAlert.addEventListener("click", () => {
+        clearTimeout(timer); // Cancel the auto-hide timer
+        showAlert.classList.add("alert-hidden"); // Add the hidden class
     });
 }

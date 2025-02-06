@@ -1,12 +1,20 @@
 const express = require("express");
 const database = require("./config/database");
-const methodOverride = require('method-override');
-const bodyParser = require('body-parser')
-const systemConfig = require('./config/system.js');
+const methodOverride = require("method-override");
+const bodyParser = require("body-parser");
+const systemConfig = require("./config/system.js");
+const flash = require("express-flash");
+const cookieParser = require("cookie-parser");
+const session = require("express-session");
 require("dotenv").config();
 
 const port = process.env.PORT;
 const app = express();
+
+// Flash
+app.use(cookieParser("keyboard cat"));
+app.use(session({cookie: {maxAge: 60000}}));
+app.use(flash());
 
 // Parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
