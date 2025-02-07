@@ -1,0 +1,22 @@
+mixin form-change-multi(action)
+    form#form-change-multi(
+        action=action
+        method="POST"
+    )
+        .d-flex.align-items-start
+            .form-group
+                select(name="type" class="form-control")
+                    option(disabled selected) -- Select --
+                    option(value="active") Active
+                    option(value="inactive") Inactive
+                    option(value="delete-all") Delete all
+                    option(value="change-position") Position
+            .form-group.ml-2
+                input(
+                    type="text"
+                    name="ids"
+                    value=""
+                    class="form-control d-none"
+                    placeholder="Enter product IDs"
+                )
+            button(type="submit" class="btn btn-primary ml-2") Apply

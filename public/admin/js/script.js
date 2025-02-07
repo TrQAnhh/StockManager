@@ -1,20 +1,30 @@
 // Button-status
+// Button-status
 const buttonsStatus = document.querySelectorAll("[button-status]");
 
-if(buttonsStatus.length > 0) {
+if (buttonsStatus.length > 0) {
     let url = new URL(window.location.href);
 
     buttonsStatus.forEach(button => {
         button.addEventListener("click", (e) => {
+            const deleted = button.getAttribute("deleted") === "true";
             const status = button.getAttribute("button-status");
 
-            if(status) {
-                url.searchParams.set("status", status);
-            } else {
+            if (deleted) {
                 url.searchParams.delete("status");
+                url.searchParams.set("deleted", "true");
+            } else {
+                if (status) {
+                    url.searchParams.set("status", status);
+                } else {
+                    url.searchParams.delete("status");
+                }
+                url.searchParams.delete("deleted");
             }
 
-            window.location.href = url;
+            url.searchParams.set("page", "1");
+
+            window.location.href = url.toString();
         });
     });
 }
@@ -58,4 +68,92 @@ if(buttonsPagination.length > 0) {
             window.location.href = url;
         })
     })
+}
+
+// Checkbox multi
+const checkboxMulti = document.querySelector("[checkbox-multi]");
+if(checkboxMulti) {
+    const inputCheckAll=checkboxMulti.querySelector("input[name='checkall']");
+    const inputsId = checkboxMulti.querySelectorAll("input[name='id']");
+
+    // Check-all
+    inputCheckAll.addEventListener("click", (e) => {
+        if(inputCheckAll.checked) {
+            inputsId.forEach(input => {
+                input.checked = true;
+            });
+        } else {
+            inputsId.forEach(input => {
+                input.checked = false;
+            });
+        }
+    });
+
+    inputsId.forEach(input => {
+        input.addEventListener("click", (e) => {
+            const countCheckedBoxes = checkboxMulti.querySelectorAll("input[name='id']:checked").length;
+            // console.log(checkedBoxes.length);
+            // console.log(inputsId.length);
+            if (countCheckedBoxes == inputsId.length) {
+                inputCheckAll.checked = true;
+            } else {
+                inputCheckAll.checked = false;
+            }
+        });
+    })
+}
+
+// Form change multi
+const formChangeMulti = document.querySelector("#form-change-multi");
+if (formChangeMulti) {
+    formChangeMulti.addEventListener("submit", (e) => {
+        e.preventDefault(); // prevent reloading pages after submitting a form
+
+        const inputsChecked = checkboxMulti.querySelectorAll("input[name='id']:checked");
+
+        // Delete - all checked products
+        const typeChange = e.target.elements.type.value;
+        if(typeChange == 'delete-all') {
+            const isConfirm = confirm("Are you sure you want to delete all checked products?");
+            if(!isConfirm) {
+                return;
+            }
+        }
+
+        if (inputsChecked.length > 0) {
+            let ids= [];
+            const inputIds = formChangeMulti.querySelector("input[name='ids']");
+
+            inputsChecked.forEach(input => {
+                const id = input.getAttribute("value");
+                if(typeChange == "change-position") {
+                    const position = input.closest("tr").querySelector("input[name='position']").value;
+                    ids.push(`${id}-${position}`);
+                } else {
+                    ids.push(id);
+                }
+            });
+            inputIds.value = ids.join(", ");
+            formChangeMulti.submit();
+        } else {
+            alert("Please choose at least one product!")
+        }
+    });
+}
+
+const showAlert = document.querySelector("[show-alert]");
+if (showAlert) {
+    const time = parseInt(showAlert.getAttribute("data-time"));
+    const closeAlert = showAlert.querySelector("[close-alert]");
+
+    // Declare timer variable in the correct scope
+    let timer = setTimeout(() => {
+        showAlert.classList.add("alert-hidden");
+    }, time);
+
+    // Hide the alert immediately when the close button is clicked
+    closeAlert.addEventListener("click", () => {
+        clearTimeout(timer); // Cancel the auto-hide timer
+        showAlert.classList.add("alert-hidden"); // Add the hidden class
+    });
 }
