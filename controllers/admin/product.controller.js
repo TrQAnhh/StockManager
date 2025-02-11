@@ -1,5 +1,5 @@
 const Product = require('../../models/product.model');
-
+const systemConfig = require('../../config/system');
 const filterStatusHelpers = require('../../helpers/filterStatus');
 const searchHelpers = require('../../helpers/search');
 const paginationHelpers = require('../../helpers/pagination');
@@ -131,4 +131,30 @@ module.exports.restoreProduct = async (req,res) => {
     );
     req.flash("success",`Successfully restore the product`);
     res.redirect("back");
+}
+
+// [GET] /admin/products/create
+module.exports.create = async (req,res) => {
+    res.render("admin/pages/product/create", {
+        pateTitle: "create"
+    });
+}
+
+// [POST] /admin/products/create
+module.exports.createPost = async (req,res) => {
+    req.body.price = parseInt(req.body.price);
+    req.body.discountPercentage = parseInt(req.body.discountPercentage);
+    req.body.stock = parseInt(req.body.stock);
+
+    if(req.body.position == '') {
+        const countProducts = await Product.countDocuments();
+        req.body.position = countProducts + 1;
+    } else {
+        req.body.position = parseInt(req.body.position);
+    }
+
+    const newProduct = new Product(req.body);
+    await newProduct.save();
+
+    res.redirect(`${systemConfig.prefixAdmin}/products`);
 }
