@@ -141,6 +141,7 @@ if (formChangeMulti) {
     });
 }
 
+// Alert
 const showAlert = document.querySelector("[show-alert]");
 if (showAlert) {
     const time = parseInt(showAlert.getAttribute("data-time"));
@@ -157,3 +158,30 @@ if (showAlert) {
         showAlert.classList.add("alert-hidden"); // Add the hidden class
     });
 }
+
+// Preview uploading-image
+const uploadImage = document.querySelector("[upload-image]");
+if(uploadImage) {
+    const uploadImageInput = document.querySelector("[upload-image-input]");
+    const uploadImagePreview = document.querySelector("[upload-image-preview]");
+    const closeButton = document.querySelector("[close-preview-image]");
+
+
+    uploadImageInput.addEventListener("change", (e) => {
+        const file = e.target.files[0];
+        if(file){
+            uploadImagePreview.src = URL.createObjectURL(file);
+            uploadImagePreview.style.display = "block";
+            closeButton.style.display = "inline-block";
+        }
+    });
+
+    closeButton.addEventListener("click", (e) => {
+        uploadImageInput.value = "";
+        uploadImagePreview.src = "";
+        uploadImagePreview.style.display = "none";
+        closeButton.style.display = "none";
+    });
+}
+
+

@@ -298,6 +298,41 @@ img {
     display: none;
 }
 
+.upload-container {
+    position: relative;
+    display: inline-block;
+}
+
+[upload-image-preview] {
+    max-width: 200px;
+    max-height: 200px;
+    display: block;
+    margin-top: 10px;
+    border-radius: 5px;
+    object-fit: contain;
+}
+
+[close-preview-image] {
+    display: none;
+    cursor: pointer;
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 25px;
+    position: absolute;
+}
+
+[close-preview-image]:hover {
+    background-color: #cc0000;
+}
+
+
 @keyframes slide-down {
     from {
         transform: translateY(-30px);
