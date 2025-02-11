@@ -141,24 +141,36 @@ module.exports.create = async (req,res) => {
 }
 
 // [POST] /admin/products/create
-module.exports.createPost = async (req,res) => {
-    // console.log(req.file);
+module.exports.createPost = async (req, res) => {
+    try {
+        // Check if required fields are missing
+        if (!req.body.title || !req.body.price || !req.body.stock || !req.body.filename) {
+            return;
+        }
 
-    req.body.price = parseInt(req.body.price);
-    req.body.discountPercentage = parseInt(req.body.discountPercentage);
-    req.body.stock = parseInt(req.body.stock);
+        // Convert numeric fields to integers
+        req.body.price = parseInt(req.body.price) || 0;
+        req.body.discountPercentage = parseInt(req.body.discountPercentage) || 0;
+        req.body.stock = parseInt(req.body.stock) || 0;
 
-    if(req.body.position == '') {
-        const countProducts = await Product.countDocuments();
-        req.body.position = countProducts + 1;
-    } else {
-        req.body.position = parseInt(req.body.position);
+        // Handle position if left empty
+        if (!req.body.position || req.body.position === '') {
+            const countProducts = await Product.countDocuments();
+            req.body.position = countProducts + 1;
+        } else {
+            req.body.position = parseInt(req.body.position) || 1;
+        }
+
+        // Ensure thumbnail path is not null
+        req.body.thumbnail = req.body.filename ? `/uploads/${req.body.filename}` : '/uploads/default.png';
+
+        // Create a new product
+        const newProduct = new Product(req.body);
+        await newProduct.save();
+
+        res.redirect(`${systemConfig.prefixAdmin}/products`);
+    } catch (error) {
+        console.error("Error creating product:", error);
+        res.redirect(`${systemConfig.prefixAdmin}/products/create`);
     }
-
-    req.body.thumbnail = `/uploads/${req.file.filename}`;
-
-    const newProduct = new Product(req.body);
-    await newProduct.save();
-
-    res.redirect(`${systemConfig.prefixAdmin}/products`);
-}
+};
