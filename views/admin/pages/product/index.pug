@@ -27,8 +27,13 @@ block main
         .card.mt-3
             .card-header Product Management
             .card-body
-                +form-change-multi(`${prefixAdmin}/products/change-multi?_method=PATCH`)
-
+                .col-4
+                    +form-change-multi(`${prefixAdmin}/products/change-multi?_method=PATCH`)
+                .col-2
+                    a(
+                        href=`${prefixAdmin}/products/create`
+                        class="btn btn-outline-success"
+                    ) Add
     // Always display the table, regardless of whether there are results or not
     table(
         class="table table-bordered table-striped"

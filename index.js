@@ -17,7 +17,7 @@ app.use(session({cookie: {maxAge: 60000}}));
 app.use(flash());
 
 // Parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: true }))
 
 // Method - override
 app.use(methodOverride('_method'))
