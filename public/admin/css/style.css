@@ -237,14 +237,12 @@ img {
 }
 
 /* Alert-success styling similar to Bootstrap */
+/* General styling for alerts */
 [show-alert] {
     position: fixed;
     top: 70px;
     right: 15px;
     z-index: 9999;
-    background-color: #d4edda;
-    border: 1px solid #c3e6cb;
-    color: #155724;
     padding: 15px;
     border-radius: 5px;
     box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
@@ -255,10 +253,38 @@ img {
     max-width: calc(100% - 30px);
     user-select: none;
     box-sizing: border-box;
-    animation: slide-down 0.5s ease, fade-out 5s ease forwards;
-    transition: opacity 0.3s ease;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    color: #155724;
+    transform: translateY(-30px);
+    will-change: transform, opacity;
 }
 
+/* Success alert styling */
+.alert-success {
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    color: #155724;
+}
+
+.alert-success::after {
+    background: green;
+    animation: progress-bar 5s linear forwards;
+}
+
+/* Error alert styling */
+.alert-danger {
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+}
+
+.alert-danger::after {
+    background: red;
+    animation: progress-bar 5s linear forwards;
+}
+
+/* Close button */
 [show-alert] button {
     background-color: #28a745;
     border: none;
@@ -271,32 +297,38 @@ img {
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-[show-alert] button:hover {
+/* Close button styling for error alerts */
+.alert-danger button {
+    background-color: #dc3545;
+}
+
+.alert-danger button:hover {
+    background-color: #c82333;
+}
+
+.alert-danger button:active {
+    background-color: #bd2130;
+    transform: scale(0.95);
+}
+
+/* Close button styling for success alerts */
+.alert-success button:hover {
     background-color: #218838;
 }
 
-[show-alert] button:active {
+.alert-success button:active {
     background-color: #1e7e34;
     transform: scale(0.95);
 }
 
-[show-alert]::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 5px;
-    background: green;
-    animation: progress-bar 5s linear forwards;
-}
-
+/* Hidden alert */
 .alert-hidden {
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
     display: none;
 }
+
 
 .upload-container {
     position: relative;

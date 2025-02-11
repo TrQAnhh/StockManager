@@ -5,6 +5,7 @@ const storageMulter =  require('../../helpers/storageMulter');
 const upload = multer({ storage: storageMulter() });
 
 const controller = require('../../controllers/admin/product.controller');
+const validate = require('../../validates/admin/product.validate');
 const router = express.Router();
 
 
@@ -14,6 +15,11 @@ router.patch("/change-multi",controller.changeMulti);
 router.delete("/delete/:id",controller.deleteProduct);
 router.patch("/restore/:id", controller.restoreProduct);
 router.get("/create", controller.create);
-router.post("/create", upload.single("thumbnail"),controller.createPost);
+
+router.post(
+    "/create",
+    upload.single("thumbnail"),
+    validate.createPost, // acts as a middleware
+    controller.createPost);
 
 module.exports = router;

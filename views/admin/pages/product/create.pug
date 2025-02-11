@@ -1,7 +1,9 @@
 extends ../../layouts/default.pug
-block main
-    h1(class="mb-4") Add new products
+include ../../mixins/alert
 
+block main
+    +alert-error(5000)
+    h1(class="mb-4") Add new products
     form(
         action=`${prefixAdmin}/products/create`
         id="form-create-product"
