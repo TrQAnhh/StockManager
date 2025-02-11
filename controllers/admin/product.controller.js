@@ -143,11 +143,6 @@ module.exports.create = async (req,res) => {
 // [POST] /admin/products/create
 module.exports.createPost = async (req, res) => {
     try {
-        // Check if required fields are missing
-        if (!req.body.title || !req.body.price || !req.body.stock || !req.body.filename) {
-            return;
-        }
-
         // Convert numeric fields to integers
         req.body.price = parseInt(req.body.price) || 0;
         req.body.discountPercentage = parseInt(req.body.discountPercentage) || 0;
@@ -162,7 +157,9 @@ module.exports.createPost = async (req, res) => {
         }
 
         // Ensure thumbnail path is not null
-        req.body.thumbnail = req.body.filename ? `/uploads/${req.body.filename}` : '/uploads/default.png';
+        if (req.file) {
+            req.body.thumbnail = `/uploads/${req.body.filename}`;
+        }
 
         // Create a new product
         const newProduct = new Product(req.body);
