@@ -14,6 +14,7 @@ router.patch("/change-status/:status/:id",controller.changeStatus);
 router.patch("/change-multi",controller.changeMulti);
 router.delete("/delete/:id",controller.deleteProduct);
 router.patch("/restore/:id", controller.restoreProduct);
+
 router.get("/create", controller.create);
 
 router.post(
@@ -21,5 +22,15 @@ router.post(
     upload.single("thumbnail"),
     validate.createPost, // acts as a middleware
     controller.createPost);
+
+router.get("/edit/:id", controller.edit);
+router.patch(
+    "/edit/:id",
+    upload.single("thumbnail"),
+    validate.editPatch, // acts as a middleware
+    controller.editPatch
+);
+
+router.get("/detail/:id", controller.detail);
 
 module.exports = router;
