@@ -113,7 +113,14 @@ block main
                                         data-id=item.id
                                     ) Restore
                             else
-                                button(class="btn btn-warning btn-sm") Edit
+                                a(
+                                    href=`${prefixAdmin}/products/detail/${item.id}`
+                                    class="btn btn-secondary btn-sm"
+                                ) Detail
+                                a(
+                                    href=`${prefixAdmin}/products/edit/${item.id}`
+                                    class="btn btn-warning btn-sm"
+                                ) Edit
                                 button(
                                     class="btn btn-danger btn-sm ml-1"
                                     button-delete

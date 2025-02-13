@@ -1,3 +1,6 @@
+/* ===================== */
+/* Global Styles         */
+/* ===================== */
 html, body {
     height: 100%;
     margin: 0;
@@ -11,6 +14,9 @@ html, body {
     height: auto;
 }
 
+/* ===================== */
+/* Sidebar Styles        */
+/* ===================== */
 .sider {
     width: auto;
     min-width: 200px;
@@ -54,6 +60,9 @@ html, body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+/* ===================== */
+/* Main Content Styles   */
+/* ===================== */
 .main {
     flex: 1;
     padding: 20px;
@@ -62,6 +71,9 @@ html, body {
     border-radius: 10px;
 }
 
+/* ===================== */
+/* Header Styles         */
+/* ===================== */
 header.header {
     background-color: #343a40;
     color: #fff;
@@ -100,6 +112,9 @@ header .inner-menu ul li a.active {
     background-color: #0056b3;
 }
 
+/* ===================== */
+/* Footer Styles         */
+/* ===================== */
 footer.footer {
     background-color: #343a40;
     color: #fff;
@@ -110,21 +125,28 @@ footer.footer {
     margin-top: auto;
 }
 
+/* ===================== */
+/* Card Component Styles */
+/* ===================== */
 .card {
     margin: 20px auto;
     width: 90%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* ===================== */
+/* Table Styles          */
+/* ===================== */
+
 table.table {
     margin: 20px auto;
     width: 90%;
     text-align: center;
     border-collapse: separate;
-    border-spacing: 0px;
+    border-spacing: 0;
     border-radius: 5px;
     overflow: hidden;
-    border: 1px;
+    border: 1px solid transparent;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -135,6 +157,17 @@ table.table td {
     border: 1px solid #dddddd;
 }
 
+/* Override input for position to use auto width (instead of inline fixed width) */
+table.table input[name="position"] {
+    width: auto !important;
+    min-width: 10px;
+    max-width: 60px;
+    padding: 5px;
+}
+
+/* ===================== */
+/* Image Styles          */
+/* ===================== */
 img {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -144,6 +177,10 @@ img {
     border: 5px solid #ffffff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
+/* ===================== */
+/* Badge & Button Styles */
+/* ===================== */
 
 .badge-success {
     background-color: #28a745;
@@ -215,6 +252,11 @@ img {
     padding: 5px 10px;
 }
 
+
+
+/* ===================== */
+/* Pagination Styles     */
+/* ===================== */
 .pagination {
     display: flex;
     justify-content: center;
@@ -236,8 +278,9 @@ img {
     box-shadow: none;
 }
 
-/* Alert-success styling similar to Bootstrap */
-/* General styling for alerts */
+/* ===================== */
+/* Alert Styles          */
+/* ===================== */
 [show-alert] {
     position: fixed;
     top: 70px;
@@ -245,7 +288,7 @@ img {
     z-index: 9999;
     padding: 15px;
     border-radius: 5px;
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -260,7 +303,6 @@ img {
     will-change: transform, opacity;
 }
 
-/* Success alert styling */
 .alert-success {
     background-color: #d4edda;
     border: 1px solid #c3e6cb;
@@ -272,7 +314,6 @@ img {
     animation: progress-bar 5s linear forwards;
 }
 
-/* Error alert styling */
 .alert-danger {
     background-color: #f8d7da;
     border: 1px solid #f5c6cb;
@@ -284,7 +325,6 @@ img {
     animation: progress-bar 5s linear forwards;
 }
 
-/* Close button */
 [show-alert] button {
     background-color: #28a745;
     border: none;
@@ -297,7 +337,6 @@ img {
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-/* Close button styling for error alerts */
 .alert-danger button {
     background-color: #dc3545;
 }
@@ -311,7 +350,6 @@ img {
     transform: scale(0.95);
 }
 
-/* Close button styling for success alerts */
 .alert-success button:hover {
     background-color: #218838;
 }
@@ -321,7 +359,6 @@ img {
     transform: scale(0.95);
 }
 
-/* Hidden alert */
 .alert-hidden {
     opacity: 0;
     pointer-events: none;
@@ -329,7 +366,9 @@ img {
     display: none;
 }
 
-
+/* ===================== */
+/* Upload Image Styles   */
+/* ===================== */
 .upload-container {
     position: relative;
     display: inline-block;
@@ -364,7 +403,9 @@ img {
     background-color: #cc0000;
 }
 
-
+/* ===================== */
+/* Keyframes Animations  */
+/* ===================== */
 @keyframes slide-down {
     from {
         transform: translateY(-30px);
@@ -397,6 +438,9 @@ img {
     }
 }
 
+/* ===================== */
+/* Responsive Styles     */
+/* ===================== */
 @media (max-width: 768px) {
     .sider {
         display: none;
@@ -412,3 +456,11 @@ img {
         gap: 10px;
     }
 }
+
+/* ===================== */
+/* New Custom Styles     */
+/* ===================== */
+
+.btn-secondary {
+    margin-right: 5px;
+}s

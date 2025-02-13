@@ -183,5 +183,3 @@ if(uploadImage) {
         closeButton.style.display = "none";
     });
 }
-
-
