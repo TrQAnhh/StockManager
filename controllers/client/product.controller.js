@@ -1,4 +1,5 @@
 const Product = require('../../models/product.model');
+const systemConfig = require("../../config/system");
 
 // [GET] /products
 module.exports.index = async (req, res) => {
@@ -17,3 +18,21 @@ module.exports.index = async (req, res) => {
     });
 }
 
+// [GET] /products/:slug
+module.exports.detail = async (req,res) => {
+    try {
+        const findCondition = {
+            deleted: false,
+            slug: req.params.slug
+        };
+
+        const product = await Product.findOne(findCondition);
+
+        res.render("client/pages/product/detail", {
+            pateTitle: "Product's Details",
+            product: product
+        });
+    } catch (error) {
+        return res.redirect(`client/products`);
+    }
+}

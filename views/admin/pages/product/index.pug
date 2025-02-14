@@ -19,29 +19,29 @@ block main
                 .col-6
                     +search(keyword)
 
-    // Determine the current filter
     - const currentFilter = filterStatus.find(filter => filter.class === 'active');
 
-    // Conditionally render the Product Management section only if the current filter is not 'Deleted'
     if currentFilter.name !== 'Deleted'
         .card.mt-3
             .card-header Product Management
             .card-body
-                .col-4
+                .col-auto
                     +form-change-multi(`${prefixAdmin}/products/change-multi?_method=PATCH`)
-                .col-2
-                    a(
-                        href=`${prefixAdmin}/products/create`
-                        class="btn btn-outline-success"
-                    ) Add
-    // Always display the table, regardless of whether there are results or not
+
     table(
         class="table table-bordered table-striped"
         checkbox-multi
     )
         thead
+            if currentFilter.name !== 'Deleted'
+                tr
+                    th(colspan="100%")
+                        div(class="d-flex justify-content-end")
+                            a(
+                                href=`${prefixAdmin}/products/create`
+                                class="btn btn-success"
+                            ) Add
             tr
-                // Conditionally render the checkbox header only if the current filter is not 'Deleted'
                 if currentFilter.name !== 'Deleted'
                     th
                         input(type="checkbox" id="check-all" name="checkall")
@@ -52,12 +52,11 @@ block main
                 th Position
                 th Status
                 th Actions
+
         tbody
             if products.length > 0
-                // Loop through products and display each item
                 each item, index in products
                     tr
-                        // Conditionally render the checkbox cell only if the current filter is not 'Deleted'
                         if currentFilter.name !== 'Deleted'
                             td
                                 input(
@@ -114,14 +113,20 @@ block main
                                         data-id=item.id
                                     ) Restore
                             else
-                                button(class="btn btn-warning btn-sm") Edit
+                                a(
+                                    href=`${prefixAdmin}/products/detail/${item.id}`
+                                    class="btn btn-secondary btn-sm"
+                                ) Detail
+                                a(
+                                    href=`${prefixAdmin}/products/edit/${item.id}`
+                                    class="btn btn-warning btn-sm"
+                                ) Edit
                                 button(
                                     class="btn btn-danger btn-sm ml-1"
                                     button-delete
                                     data-id=item.id
                                 ) Delete
             else
-                // If no products are found, display a message in a single row spanning all columns
                 tr
                     td(colspan="7" class="text-center text-danger fw-bold") No results found
     +pagination(pagination)

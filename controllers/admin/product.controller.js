@@ -141,24 +141,96 @@ module.exports.create = async (req,res) => {
 }
 
 // [POST] /admin/products/create
-module.exports.createPost = async (req,res) => {
-    // console.log(req.file);
+module.exports.createPost = async (req, res) => {
+    try {
+        // Convert numeric fields to integers
+        req.body.price = parseInt(req.body.price) || 0;
+        req.body.discountPercentage = parseInt(req.body.discountPercentage) || 0;
+        req.body.stock = parseInt(req.body.stock) || 0;
 
-    req.body.price = parseInt(req.body.price);
-    req.body.discountPercentage = parseInt(req.body.discountPercentage);
-    req.body.stock = parseInt(req.body.stock);
+        // Handle position if left empty
+        if (!req.body.position || req.body.position === '') {
+            const countProducts = await Product.countDocuments();
+            req.body.position = countProducts + 1;
+        } else {
+            req.body.position = parseInt(req.body.position) || 1;
+        }
 
-    if(req.body.position == '') {
-        const countProducts = await Product.countDocuments();
-        req.body.position = countProducts + 1;
-    } else {
-        req.body.position = parseInt(req.body.position);
+        // Ensure thumbnail path is not null
+        if (req.file) {
+            req.body.thumbnail = `/uploads/${req.file.filename}`;
+        }
+
+        // Create a new product
+        const newProduct = new Product(req.body);
+        await newProduct.save();
+
+        res.redirect(`${systemConfig.prefixAdmin}/products`);
+    } catch (error) {
+        console.error("Error creating product:", error);
+        res.redirect(`${systemConfig.prefixAdmin}/products/create`);
     }
+}
 
-    req.body.thumbnail = `/uploads/${req.file.filename}`;
+// [GET] /admin/products/edit/:id
+module.exports.edit = async (req,res) => {
+    try {
+        const findCondition = {
+            deleted: false,
+            _id: req.params.id
+        };
 
-    const newProduct = new Product(req.body);
-    await newProduct.save();
+        const product = await Product.findOne(findCondition);
 
-    res.redirect(`${systemConfig.prefixAdmin}/products`);
+        res.render("admin/pages/product/edit", {
+            pateTitle: "Edit products",
+            product: product
+        });
+    } catch (error) {
+        return res.redirect(`${systemConfig.prefixAdmin}/products`);
+    }
+}
+
+// [PATCH] /admin/products/edit/:id
+module.exports.editPatch = async (req,res) => {
+    try {
+        // Convert numeric fields to integers
+        req.body.price = parseInt(req.body.price) || 0;
+        req.body.discountPercentage = parseInt(req.body.discountPercentage) || 0;
+        req.body.stock = parseInt(req.body.stock) || 0;
+        req.body.position = parseInt(req.body.position) || 1;
+
+
+        // Ensure thumbnail path is not null
+        if (req.file) {
+            req.body.thumbnail = `/uploads/${req.file.filename}`;
+        }
+
+        // Create a new product
+        await Product.updateOne({_id: req.params.id},req.body);
+        req.flash("success", "Successfully editing a product!");
+        res.redirect("back");
+    } catch (error) {
+        console.error("Error editing product:", error);
+        res.redirect("back");
+    }
+}
+
+// [GET] /admin/products/detail/:id
+module.exports.detail = async (req,res) => {
+    try {
+        const findCondition = {
+            deleted: false,
+            _id: req.params.id
+        };
+
+        const product = await Product.findOne(findCondition);
+
+        res.render("admin/pages/product/detail", {
+            pateTitle: "Product's Details",
+            product: product
+        });
+    } catch (error) {
+        return res.redirect(`${systemConfig.prefixAdmin}/products`);
+    }
 }

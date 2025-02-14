@@ -1,7 +1,9 @@
 extends ../../layouts/default.pug
-block main
-    h1(class="mb-4") Add new products
+include ../../mixins/alert
 
+block main
+    +alert-error(5000)
+    h1(class="mb-4") Add new products
     form(
         action=`${prefixAdmin}/products/create`
         id="form-create-product"
@@ -55,7 +57,10 @@ block main
                 value="0"
                 min="0"
             )
-        div(class="form-group")
+        div(
+            class="form-group"
+            upload-image
+        )
             label(for="thumbnail") Thumbnail
             input(
                 type="file"
@@ -63,6 +68,15 @@ block main
                 id="thumbnail"
                 name="thumbnail"
                 accept="image/*"
+                upload-image-input
+            )
+            button(
+                type="button"
+                close-preview-image
+            ) &times;
+            img(
+                src=""
+                upload-image-preview
             )
         div(class="form-group")
             label(for="position") Position
