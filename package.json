@@ -4,9 +4,12 @@
   "description": "A website designed for self-learning about website development using the ExpressJS framework, with a focus on managing products",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
+    "build": "echo 'Skipping build step'",
     "start:dev": "nodemon --inspect index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  }
+,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/TrQAnhh/Product-Management.git"
