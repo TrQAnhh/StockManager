@@ -1,6 +1,6 @@
 module.exports.createPost = (req, res, next) => {
     // Check if required fields are missing
-    if (!req.body.title || !req.body.price || !req.body.stock || !req.body.filename) {
+    if (!req.body.title || !req.body.price || !req.body.stock ) {
         req.flash("error", "Missing required fields.");
         res.redirect("back");
         return;

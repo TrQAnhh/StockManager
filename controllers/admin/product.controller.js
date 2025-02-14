@@ -156,10 +156,10 @@ module.exports.createPost = async (req, res) => {
             req.body.position = parseInt(req.body.position) || 1;
         }
 
-        // Ensure thumbnail path is not null
-        if (req.file) {
-            req.body.thumbnail = `/uploads/${req.file.filename}`;
-        }
+        // Ensure thumbnail path is not null (commented because we already have cloudinary to store static files)
+        // if (req.file) {
+        //     req.body.thumbnail = `/uploads/${req.file.filename}`;
+        // }
 
         // Create a new product
         const newProduct = new Product(req.body);
