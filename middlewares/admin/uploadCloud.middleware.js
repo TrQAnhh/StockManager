@@ -1,4 +1,6 @@
 const cloudinary = require('cloudinary').v2;
+require('dotenv').config();
+
 const streamifier = require('streamifier');
 
 // Cloudinary
@@ -8,7 +10,11 @@ cloudinary.config({
     api_secret: process.env.CLOUD_API_SECRET,
 });
 
+
 module.exports.upload = (req, res, next) => {
+    console.log(process.env.CLOUD_NAME);
+    console.log(process.env.CLOUD_API_KEY);
+    console.log(process.env.CLOUD_API_SECRET);
     if(req.file) {
         let streamUpload = (req) => {
             return new Promise((resolve, reject) => {
