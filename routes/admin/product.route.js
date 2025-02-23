@@ -28,6 +28,7 @@ router.get("/edit/:id", controller.edit);
 router.patch(
     "/edit/:id",
     upload.single("thumbnail"),
+    uploadCloud.upload,
     validate.editPatch, // acts as a middleware
     controller.editPatch
 );

@@ -1,5 +1,4 @@
 // Button-status
-// Button-status
 const buttonsStatus = document.querySelectorAll("[button-status]");
 
 if (buttonsStatus.length > 0) {
@@ -182,4 +181,42 @@ if(uploadImage) {
         uploadImagePreview.style.display = "none";
         closeButton.style.display = "none";
     });
+}
+
+// Sorting 
+const sort = document.querySelector("[sort]");
+if(sort) {
+    const sortSelect = document.querySelector("[sort-select]");
+    const clearButton = document.querySelector("[sort-clear]");
+    
+    let url = new URL(window.location.href);
+
+    // Set the url
+    sortSelect.addEventListener("change", (e) => {
+        const value = e.target.value; // hoặc là value = sortSelect.value cũng được vì value là thuộc tính mặc định
+        const [sortKey, sortValue] = value.split("-");
+        
+        if(sortKey && sortValue) {
+            url.searchParams.set("sortKey", sortKey);
+            url.searchParams.set("sortValue", sortValue);
+        }
+        window.location.href = url;
+    });
+
+    // Clear button
+    clearButton.addEventListener("click",(e) =>{
+        url.searchParams.delete("sortKey");
+        url.searchParams.delete("sortValue");
+        window.location.href = url;
+    });
+
+    const selectedSortKey = url.searchParams.get("sortKey");
+    const selectedSortValue = url.searchParams.get("sortValue");
+
+    if(selectedSortKey && selectedSortValue){
+        const stringSort = `${selectedSortKey}-${selectedSortValue}`;
+        const selectedElement = sortSelect.querySelector(`option[value="${stringSort}"]`);
+        selectedElement.setAttribute("selected", "selected"); // hoặc gán trực tiếp selectedElement.selected=true;
+    }
+
 }

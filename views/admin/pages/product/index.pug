@@ -4,6 +4,7 @@ include ../../mixins/search
 include ../../mixins/pagination
 include ../../mixins/change-multi-status
 include ../../mixins/alert
+include ../../mixins/sort
 
 block main
     +alert-success("5000")
@@ -35,8 +36,10 @@ block main
         thead
             if currentFilter.name !== 'Deleted'
                 tr
-                    th(colspan="100%")
-                        div(class="d-flex justify-content-end")
+                   th(colspan="100%")
+                        div(class="d-flex justify-content-between align-items-center w-100")
+                            div(sort class="d-flex align-items-center gap-2")
+                                +sort()
                             a(
                                 href=`${prefixAdmin}/products/create`
                                 class="btn btn-success"
@@ -128,7 +131,7 @@ block main
                                 ) Delete
             else
                 tr
-                    td(colspan="7" class="text-center text-danger fw-bold") No results found
+                    td(colspan="8" class="text-center text-danger fw-bold") No results found
     +pagination(pagination)
 
     form(

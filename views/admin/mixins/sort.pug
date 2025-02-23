@@ -1,0 +1,19 @@
+mixin sort()
+    select(
+        class="form-control form-control-sm w-auto"
+        name="sort"
+        sort-select
+        style="height: 40px; text-align: center; text-align-last: center;"
+    )
+        option(disabled selected) -- Select --
+        option(value="position-desc") Position Descending
+        option(value="position-asc") Position Ascending
+        option(value="price-desc") Price Descending
+        option(value="price-asc") Price Ascending
+        option(value="title-asc") Title A - Z
+        option(value="title-desc") Title Z - A
+    button(
+        class="btn btn-danger"
+        sort-clear
+        style="margin-left: 10px"
+    ) Clear
